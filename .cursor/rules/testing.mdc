@@ -1,0 +1,13 @@
+---
+description: efiand.ru — project-specific тесты
+alwaysApply: true
+---
+
+# Тестирование efiand.ru
+
+Общие правила — [`testing-core.mdc`](site-core/testing-core.mdc).
+
+## Project-specific
+
+- **Integration** — `test/integration/validate.spec.js`: промо, тарифы на `/order`, 404
+- **Privacy / mailto** — `test/routes/privacy.spec.js` (`registerPrivacyRouteTests` + заявка/ошибка)

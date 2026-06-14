@@ -1,0 +1,22 @@
+---
+description: efiand.ru — политика конфиденциальности (шаблоны и UI)
+alwaysApply: true
+---
+
+# efiand.ru — политика конфиденциальности
+
+Общая структура §1–§10, дополнения email/формы и тесты — в [`.cursor/rules/site-core/privacy-core.mdc`](site-core/privacy-core.mdc). Ниже — только дополнения для efiand.ru.
+
+## Шаблоны и UI
+
+- Ссылка в футере inner-page: [`renderInnerPage`](app/common/templates/inner-page.js).
+- Mailto на страницах с кнопкой (например `/order`) — [`renderPrivacyLinkTemplate`](app/common/templates/inner-page.js).
+- Страницы ошибок с mailto — [`renderErrorPage`](app/common/templates/error-page.js) + [`renderMailtoContactWithPrivacy`](../../site-core/common/templates/mailto-privacy.js).
+
+## Применимые дополнения
+
+- **Email** — есть `mailto:` через [`getEmailLink`](../../site-core/common/lib/get-email-link.js) (`#core/common/lib/get-email-link.js`); блок «формы» из privacy-core **не применяется** (форм на сайте нет).
+
+## Тесты
+
+[`test/routes/privacy.spec.js`](test/routes/privacy.spec.js) — `registerPrivacyRouteTests` + project-specific `patterns` (заявка, сообщение об ошибке); базовый набор — в core.

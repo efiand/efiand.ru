@@ -1,0 +1,41 @@
+---
+description: efiand.ru — структура проекта и доменная логика
+alwaysApply: true
+---
+
+# efiand.ru
+
+Статический MPA-портфолио. Shared-код — [`site-core`](../site-core) (`#core/*`). Стиль JS/CSS, линтинг, workflow — junction [`.cursor/rules/site-core/`](site-core/) (`code-style-core.mdc`, `workflow-core.mdc`, …); **не дублируй** их в хосте.
+
+## Структура
+
+- `app/common/` — константы, шаблоны (`promo`, `nav`, `order`, …)
+- `app/server/` — роуты, `app.js` (`createApp`, `renderPage` через `createRenderPage`)
+- `src/client/` — CSS (BEM в `css/blocks/`), `entries/main.js` (`configure-site` + Metrika)
+- `public/` — статика после `npm run build` (`bundles/main.js`, `bundles/main.css`; rolldown)
+
+## configure-site
+
+Side-effect init — `app/common/configure-site.js` (скаляры, `version`) + `app/server/lib/app.js` (`setSiteConfig({ routes })`) и `src/client/entries/main.js`. `host`/`port` — `getSiteConfig()`; порт dev — `DEV_PORT`, prod/systemd — `PORT`.
+
+## site-core
+
+- Зависимость: `"site-core": "file:../site-core"` (CI — git pin `@X.Y.Z`)
+- Импорты shared: `#core/common/*`, `#core/server/*`, `#core/client/*`, `#core/test-helpers/*`
+- `postinstall`: `site-core-postinstall` — junction rules, `.editorconfig`, `.vscode/*`, шрифты, pre-commit; `.gitignore` — по [`gitignore.host.example`](../site-core/config/gitignore.host.example)
+- Prod assets: `buildAssetQuery(getSiteConfig().version.CSS|JS)` → `?v=N&core=X.Y.Z`
+- CLI: `site-core-dev`, `site-core-lint`, `site-core-run` (rolldown, postcss…); тесты — `--import site-core/tools/register-vendors.js`
+
+## Dev
+
+`npm run dev` / `npm run preview` — `site-core-dev`. SSE reload, importmap `#core/` → `/core/`.
+
+## Тесты
+
+`npm test` — см. [`testing-core.mdc`](site-core/testing-core.mdc) (§ Хосты). Project-specific — [`testing.mdc`](testing.mdc): integration (промо, `/order`), privacy/mailto.
+
+## Деплой
+
+Reusable workflows site-core — pin в [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Deploy **по умолчанию**; opt-out — **`[no-deploy]`**, **`[WIP]`**; skip CI — **`[skip`**. Подробнее — [`workflow-core.mdc`](site-core/workflow-core.mdc).
+
+**Шаг 3 (после публикации site-core):** thin caller — [`ci.host.example.yml`](../site-core/config/ci.host.example.yml).

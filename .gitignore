@@ -1,0 +1,15 @@
+*cache*
+*tmp*
+.DS_Store
+.cursor/rules/site-core
+.editorconfig
+.env
+.vscode/*
+Thumbs.db
+app/__
+bundles
+logs
+node_modules
+public/**/*.html
+public/*.xml
+src/client/css/common/fonts.css
