@@ -1,6 +1,6 @@
 .content {
 	padding: 2rem;
-	background-color: #ffffff;
+	background-color: var(--color-white);
 	border-radius: 0.5rem;
 	box-shadow: var(--shadow);
 }

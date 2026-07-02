@@ -1,4 +1,5 @@
 import { renderNav } from '#common/templates/nav.js';
+import { renderSiteFooter } from '#common/templates/site-footer.js';
 
 function renderInnerPage({ heading = '', pathname = '', template = '' } = {}) {
 	return /* html */ `
@@ -7,24 +8,8 @@ function renderInnerPage({ heading = '', pathname = '', template = '' } = {}) {
 			${heading ? /* html */ `<h1 class="_visually-hidden">${heading}</h1>` : ''}
 			${template}
 
-			${renderPrivacyLinkTemplate(pathname)}
+			${renderSiteFooter(pathname)}
 		</main>
-	`;
-}
-
-function renderPrivacyLinkTemplate(pathname = '') {
-	if (pathname === '/privacy') {
-		return '';
-	}
-
-	const preamble = pathname === '/order' ? 'Нажимая на кнопку, вы соглашаетесь с ' : '';
-	const policyText = pathname === '/order' ? 'Политикой обработки персональных данных' : 'Политика конфиденциальности';
-
-	return /* html */ `
-		<footer class="inner-page__footer">
-			${preamble}
-			<a class="inner-page__footer-link" href="/privacy">${policyText}</a>
-		</footer>
 	`;
 }
 

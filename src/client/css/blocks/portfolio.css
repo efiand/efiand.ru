@@ -15,7 +15,7 @@
 	align-content: start;
 	gap: 0.5rem;
 	padding: 1.5rem;
-	background-color: #ffffff;
+	background-color: var(--color-white);
 	border-radius: 0.5rem;
 	box-shadow: var(--shadow);
 }

@@ -69,10 +69,10 @@ function renderPromo(main = '', addition = '') {
 				<circle fill="#7d7f79" cx="171" cy="158" r="7" />
 				<circle fill="#3c3233" cx="171" cy="158" r="3" />
 				<path
-					fill="#ffffff"
+					fill="var(--color-white)"
 					d="M170 157l1-1h-2l1 1zm44 85c-10 0-20-2-27-4v1c0 9 12 17 27 17s27-8 27-17v-1c-8 2-17 4-27 4z"
 				/>
-				<path fill="#ffffff" d="M256 157v-1h-1l1 1z" />
+				<path fill="var(--color-white)" d="M256 157v-1h-1l1 1z" />
 			</svg>
 		</main>
 	`;

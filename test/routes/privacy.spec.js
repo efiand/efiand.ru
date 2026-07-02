@@ -4,6 +4,7 @@ import { privacyRoute } from '#server/routes/privacy.js';
 
 registerPrivacyRouteTests(privacyRoute, {
 	email: 'efiand@ya.ru',
+	hasCookieConsent: true,
 	hasEmail: true,
 	patterns: [/разработку сайта/, /сообщени(?:е|я) об ошибке/],
 });
